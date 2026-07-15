@@ -35,7 +35,7 @@ def login(driver):
     """)
 
     time.sleep(8)
-    print("✅ Logged in")
+    print(" Logged in")
 
 
 def go_to_activity_center(driver):
@@ -45,35 +45,35 @@ def go_to_activity_center(driver):
     """)
     if link:
         link.click()
-        print("✅ Opened Activity Center")
+        print(" Opened Activity Center")
     time.sleep(5)
 
 
-# ✅ TC001
+#  TC001
 def test_tc001_activity_center_loads():
     driver = setup()
     try:
         login(driver)
         go_to_activity_center(driver)
         assert "activity" in driver.page_source.lower()
-        print("✅ TC001 PASSED")
+        print(" TC001 PASSED")
     finally:
         driver.quit()
 
 
-# ✅ TC002
+#  TC002
 def test_tc002_no_prenote():
     driver = setup()
     try:
         login(driver)
         go_to_activity_center(driver)
         assert "prenote" not in driver.page_source.lower()
-        print("✅ TC002 PASSED")
+        print(" TC002 PASSED")
     finally:
         driver.quit()
 
 
-# ✅ TC003
+#  TC003
 def test_tc003_open_transaction():
     driver = setup()
     try:
@@ -83,7 +83,7 @@ def test_tc003_open_transaction():
         txn = driver.find_elements("xpath", "//div[contains(@class,'transaction')]")
         if txn:
             txn[0].click()
-            print("✅ Opened transaction")
+            print(" Opened transaction")
 
         time.sleep(3)
 
