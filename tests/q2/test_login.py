@@ -12,20 +12,20 @@ def test_q2_login():
     )
 
     try:
-        print("🚀 Starting Q2 Login Test...")
+        print(" Starting Q2 Login Test...")
 
         driver.get("https://secure.cambridgesavings.com/cambridgesavingsonlinebanking/uux.aspx#/login")
         time.sleep(5)
 
-        print("✅ Page loaded")
+        print(" Page loaded")
 
-        # ✅ Find all q2-input shadow hosts
+        #  Find all q2-input shadow hosts
         hosts = driver.find_elements(By.CSS_SELECTOR, "q2-input")
 
         username_field = None
         password_field = None
 
-        # ✅ Extract actual input fields from shadow DOM
+        #  Extract actual input fields from shadow DOM
         for host in hosts:
             try:
                 shadow_root = driver.execute_script(
@@ -45,20 +45,20 @@ def test_q2_login():
             except:
                 continue
 
-        # ✅ Enter credentials
+        #  Enter credentials
         if username_field:
             username_field.send_keys("mahmedcsb")
-            print("✅ Username entered")
+            print(" Username entered")
         else:
-            print("❌ Username field not found")
+            print(" Username field not found")
 
         if password_field:
             password_field.send_keys("Cambridge3!!")
-            print("✅ Password entered")
+            print(" Password entered")
         else:
-            print("❌ Password field not found")
+            print(" Password field not found")
 
-        # ✅ Click login button (JS-based, stable)
+        #  Click login button (JS-based, stable)
         login_button = driver.execute_script("""
             return Array.from(document.querySelectorAll('button'))
                 .find(b => b.innerText.toLowerCase().includes('log'))
@@ -66,21 +66,21 @@ def test_q2_login():
 
         if login_button:
             driver.execute_script("arguments[0].click();", login_button)
-            print("✅ Login button clicked")
+            print(" Login button clicked")
         else:
-            print("❌ Login button not found")
+            print(" Login button not found")
 
-        # ✅ Wait after login
+        #  Wait after login
         time.sleep(10)
 
-        # ✅ Basic validation (URL changed or page updated)
+        #  Basic validation (URL changed or page updated)
         current_url = driver.current_url.lower()
-        print("✅ Current URL:", current_url)
+        print(" Current URL:", current_url)
 
         assert "login" not in current_url or "dashboard" in current_url
 
-        print("✅ LOGIN TEST PASSED ✅")
+        print(" LOGIN TEST PASSED ")
 
     finally:
         driver.quit()
-        print("🧹 Browser closed")
+        print(" Browser closed")
